@@ -1,4 +1,4 @@
-<nav class="w-full p-2 border-b-2 border-b-slate-500 bg-blue">
+<nav class="w-full {{ $isAdmin ? "fixed top-0" : ''}} p-2 border-b-2 border-b-slate-500 z-[100] bg-blue">
     <div class="mx-auto px-9">
         <div class="flex items-center justify-between h-16">
             <div class="flex items-center">

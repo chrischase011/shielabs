@@ -19,7 +19,7 @@
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform "
         x-transition:leave-end="opacity-0 transform fade" id="sidebar"
         class="w-full h-screen fixed z-[60] bg-black bg-opacity-50">
-        <div class="w-1/4 bg-white h-full relative flex flex-col z-[70]">
+        <div class="w-1/4 bg-white h-full relative mt-20 flex flex-col z-[70]">
             <div class="w-full flex justify-end">
                 <button x-on:click="open = ! open"
                     class=" bg-white border-2 float-right p-1 px-3 rounded hover:bg-gray-100 transition ease-linear font-bold">

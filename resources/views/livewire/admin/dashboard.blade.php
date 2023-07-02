@@ -1,14 +1,13 @@
 @section('title', 'Admin Dashboard - ' . config('app.name', 'Shielabs'))
 @livewire('components.sidebar')
-<div class="relative z-10 mt-10 p-5">
+<div class="relative z-10 top-20 p-5">
     <div class="w-full">
         <div class="text-center grid grid-cols-3 gap-4 p-3">
             <div id="salesChart" class="col-span-1 shadow-lg h-auto p-3">
             </div>
             <div id="productsChart" class="col-span-1 shadow-lg h-auto p-3">
             </div>
-            <div class="col-span-1 shadow-lg h-auto p-3">
-                Users
+            <div id="usersChart" class="col-span-1 shadow-lg h-auto p-3">
             </div>
         </div>
     </div>
@@ -56,18 +55,26 @@
             enabled: false
         },
         stroke: {
-            curve: 'straight'
+            curve: 'smooth',
+            lineCap: 'round'
         },
 
         title: {
             text: 'Sales',
-            align: 'center'
+            align: 'center',
+            style: {
+                fontSize: '22px',
+                fontFamily: 'Poppins'
+            }
         },
         subtitle: {
             text: 'Monthly Sales',
-            align: 'left'
+            align: 'center',
+            style: {
+                fontSize: '16px',
+            }
         },
-        labels: [...Array(24).keys()].map(n => `2018-09-0${n+1}`),
+        labels: [...Array(24).keys()].map(n => `2023-09-0${n+1}`),
         xaxis: {
             type: "datetime",
             show: false
@@ -86,7 +93,7 @@
     var sampleData2 = [47, 45, 54, 38, 56];
     var productsChartOptions = {
         series: [{
-            name: "Quantity",
+            name: "#",
             data: randomizeArray(sampleData2)
         }],
         chart: {
@@ -108,11 +115,18 @@
 
         title: {
             text: 'Products',
-            align: 'center'
+            align: 'center',
+            style: {
+                fontSize: '22px',
+                fontFamily: 'Poppins'
+            }
         },
         subtitle: {
             text: 'Quantity',
-            align: 'left'
+            align: 'center',
+            style: {
+                fontSize: '16px',
+            }
         },
         labels: ["Shoes", "Dress", "Pants", "Bags", "Shirts"],
         xaxis: {
@@ -130,4 +144,55 @@
     var productsChart = new ApexCharts(document.querySelector('#productsChart'), productsChartOptions).render();
 
 
+    var usersChartOptions = {
+        series: [{
+            name: "Users",
+            data: {!! $usersCount !!},
+        }],
+        chart: {
+            type: 'bar',
+            height: 350,
+            zoom: {
+                enabled: false
+            },
+            sparkline: {
+                enabled: true
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+
+        title: {
+            text: 'Users',
+            align: 'center',
+            style: {
+                fontSize: '22px',
+                fontFamily: 'Poppins'
+            }
+        },
+        subtitle: {
+            text: 'Monthly Users',
+            align: 'center',
+            style: {
+                fontSize: '16px',
+            }
+        },
+        labels: {!! $usersMonth !!},
+        xaxis: {
+            type: "category",
+            show: false,
+        },
+        yaxis: {
+            show: false
+        },
+        legend: {
+            horizontalAlign: 'left'
+        }
+    };
+
+    var usersChart = new ApexCharts(document.querySelector('#usersChart'), usersChartOptions).render();
 </script>

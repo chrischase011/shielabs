@@ -5,11 +5,13 @@ namespace App\Http\Livewire\Components;
 use App\Models\Roles;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class Navigation extends Component
 {
     public $user;
     public $userRole;
+    public $isAdmin;
 
     public $links = [
         ['name' => 'Home', 'url' => '#'],
@@ -21,13 +23,14 @@ class Navigation extends Component
     {
         $this->user = Auth::user() ;
         $this->userRole = $this->user !== null && $this->user !== '' ? Roles::firstWhere('id', $this->user->role) : null;
+        $this->isAdmin = request()->route()->getPrefix() === '/admin' ? true : false;
     }
 
     public function logout()
     {
         Auth::logout();
 
-        return bacK();
+        return redirect()->intended('/');
     }
 
     public function render()
